@@ -1,0 +1,230 @@
+/* ==UserStyle==
+@name           lowcygier.pl - Ciemny Styl
+@namespace      github.com/pabli24
+@version        1.0.0
+@description    Ciemny styl dla Łowcy Gier i bazaru
+@author         Pabli
+@license        MIT
+@homepageURL    https://github.com/pabli24/LowcyGier-Dark
+@supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
+@preprocessor   stylus
+@var            checkbox kafle  "Ukryj kafelki"                            0
+@var            color    hbg    "Header Background color"                  #036
+@var            color    bg     "Background color"                         #012
+@var            color    pbg    "Post Background color"                    #000f1f
+@var            color    txt    "Text color"                               #F0F8FF
+@var            color    atxt   "Link color"                               #7CB9E8
+@var            color    atxth  "Link color on hover"                      #007FFF
+@var            checkbox sb     "Custom Scrollbar"                         1
+@var            color    sbc    "Scrollbar color"                          #7CB9E8
+@var            color    sbch   "Scrollbar color on hover (chromium only)" #007FFF
+==/UserStyle== */
+
+@-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
+
+if kafle {
+	.tiles-container {
+		display: none
+	}
+}
+if sb {
+	//chrome
+	::-webkit-scrollbar {
+		width: 8px
+		background-color: rgba(0, 0, 0, 0)
+	} 
+	::-webkit-scrollbar-thumb {
+		background-color: sbc
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: sbch !important
+	}
+	::-webkit-scrollbar-corner {
+		background: sbc
+	}
+	//firefox
+	html {
+		scrollbar-color: sbc bg !important
+		scrollbar-width: thin !important
+	}
+}
+html, body, .main-container, .footer-widget {
+	background: bg
+	color: txt
+}
+body:not(.background-image) .intro {
+	background: hbg
+}
+body:not(.background-image) .intro .intro-background-fade-0 {
+	background: unset
+}
+body:not(.background-image) .intro .intro-background-fade-1 {
+	background: linear-gradient(0deg, bg 0%, hbg 100%)
+}
+.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn {
+	background-color: pbg
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5)
+}
+.discount-code {
+	border: 1px dashed rgba(255, 255, 255, .45)
+	background: pbg
+}
+.discount-code:hover, .discount-code:before {
+	background: #001b38
+}
+.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p {
+	color: txt
+}
+.breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
+	fill: txt
+}
+.arrow-nav:hover:after {
+	border-color: atxth !important
+}
+.post .nc-meta, .post .nc-submeta {
+	color: rgba(240, 248, 255, .7)
+}
+.sidebar-widget h3 a::after, .arrow-nav.next:after, .arrow-nav.prev:after {
+	border: 1px solid txt
+	border-width: 2px 2px 0 0
+}
+a, .media-heading > a {
+	color: atxt
+}
+a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover::after, .post-navigation .single-post-link:hover, .breadcrumbs-widget a:active, .breadcrumbs-widget a:focus, .breadcrumbs-widget a:hover, .post .nc-main .post-title a:hover {
+	color: atxth
+	text-decoration: none
+}
+.form-control, .form-control:focus, .search-widget .btn , .search-widget .btn:hover, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+	color: #fff
+	background-color: rgba(0, 0, 0, .2)
+	border: unset
+}
+.search-widget .btn svg {
+	fill: #fff
+}
+.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+	color: #fff
+	background-color: #002144
+	border-color: #002144
+}
+.btn-primary:hover {
+	color: #fff
+	background-color: #001730
+	border-color: #001730
+}
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
+	box-shadow: unset
+}
+.filters-widget .filtrowanie .btn {
+	border: unset
+}
+.post-widget .nc-meta a {
+	background: #243041
+}
+.post-widget .nc-meta a:hover {
+	background: #1f2938
+}
+hr, .border-top, .footer-widget .section-divider {
+	border-top: 1px solid rgba(255, 255, 255, .1) !important
+}
+.svg-icon-drm-steam {
+	fill: #c8cbca !important
+}
+img[alt="Steam"], .svg-icon-link {
+	filter: invert(1)
+}
+img[alt="Kinguin"] {
+	background: #ddd
+	border-radius: 10px !important
+	border: 5px solid #ddd
+	box-sizing: content-box
+}
+.svg-icon.svg-icon-platform-playstation {
+	filter: brightness(3)
+}
+.ggdeals-prices-widget .widget-header {
+	background-color: #002144
+}
+.ggdeals-prices-widget .price-row {
+	border: 1px solid rgba(255, 255, 255, .1)
+}
+.ggdeals-prices-widget .see-more {
+	background-color: #002144
+	color: #fff
+}
+.ggdeals-prices-widget .see-more:hover {
+	background-color: #001730;
+}
+.ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
+	color: txt
+}
+
+.pagination-widget ul a, .pagination-widget ul span {
+	color: txt
+	background: unset
+}
+.pagination-widget ul a {
+	border: 1px solid #13293d
+}
+.pagination-widget ul a:hover {
+	background-color: #13293d
+	border-color: #13293d
+}
+.pagination-widget ul li:first-child a::before, .pagination-widget ul li:last-child a::after {
+	filter: invert(1)
+}
+
+// bazar
+.navbar-inverse {
+	background-color: hbg
+	border-color: hbg
+}
+.btn-disabled, .btn-disabled:hover {
+	color: #fff;
+}
+.well {
+	border: 1px solid rgba(255, 255, 255, .1)
+}
+.platform, .numbers-stats {
+	color: txt;
+}
+.pager-wrapper > li {
+	border-top: solid 3px rgba(255, 255, 255, .1)
+}
+.row.vertical-divider div[class^="col-"]:first-child {
+	border-left: 1px solid rgba(255, 255, 255, .1)
+}
+.row.vertical-divider > div[class^="col-"] {
+	border-left: 1px solid rgba(255, 255, 255, .1)
+}
+.row.vertical-divider div[class^="col-"]:last-child {
+	border-right: 1px solid rgba(255, 255, 255, .1)
+}
+.myactive > a {
+	color: #fff !important
+}
+.easy-autocomplete input {
+	border-color: #010a14
+	color: #fff
+}
+.easy-autocomplete-container ul li.selected {
+	background: none repeat scroll 0 0 #00060d
+}
+.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+	background: #010a14
+	border-color: rgba(255, 255, 255, .1)
+}
+.dropdown-menu {
+	background-color: #010a14
+}
+.btn-default {
+	color: #fff !important
+	background-color: rgba(0,0,0,0.2) !important
+	border-color: #010a14 !important
+}
+.form-group > select > option {
+	background-color: #010a14
+}
+
+}
