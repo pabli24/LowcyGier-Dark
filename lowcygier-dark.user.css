@@ -1,23 +1,23 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.0
+@version        1.0.1
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
 @homepageURL    https://github.com/pabli24/LowcyGier-Dark
 @supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
 @preprocessor   stylus
-@var            checkbox kafle  "Ukryj kafelki"                            0
-@var            color    hbg    "Header Background color"                  #036
-@var            color    bg     "Background color"                         #012
-@var            color    pbg    "Post Background color"                    #000f1f
-@var            color    txt    "Text color"                               #F0F8FF
-@var            color    atxt   "Link color"                               #7CB9E8
-@var            color    atxth  "Link color on hover"                      #007FFF
-@var            checkbox sb     "Custom Scrollbar"                         1
-@var            color    sbc    "Scrollbar color"                          #7CB9E8
-@var            color    sbch   "Scrollbar color on hover (chromium only)" #007FFF
+@var            checkbox kafle  "Ukryj kafelki"                                          0
+@var            color    hbg    "Kolor tła nagłówka"                                     #036
+@var            color    bg     "Kolor tła"                                              #012
+@var            color    pbg    "Kolor tła postów"                                       #000f1f
+@var            color    txt    "Kolor tekstu"                                           #F0F8FF
+@var            color    atxt   "Kolor linków"                                           #7CB9E8
+@var            color    atxth  "Kolor linków po najechaniu"                             #007FFF
+@var            checkbox sb     "Pasek przewijania"                                      1
+@var            color    sbc    "Kolor paska przewijania"                                #7CB9E8
+@var            color    sbch   "Kolor paska przewijania po najechaniu (tylko chromium)" #007FFF
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
@@ -68,11 +68,17 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 .discount-code {
 	border: 1px dashed rgba(255, 255, 255, .45)
 	background: pbg
+	&:hover, &:before {
+		background: #001b38
+	}
 }
-.discount-code:hover, .discount-code:before {
-	background: #001b38
+.post .promos-box-wrapper {
+	background: pbg
+	ul li:before {
+		background: txt
+	}
 }
-.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p {
+.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span {
 	color: txt
 }
 .breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
@@ -125,13 +131,17 @@ a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover
 .post-widget .nc-meta a:hover {
 	background: #1f2938
 }
+.post-alert {
+	background: rgba(255, 255, 255, .1) 
+}
 hr, .border-top, .footer-widget .section-divider {
 	border-top: 1px solid rgba(255, 255, 255, .1) !important
 }
+
 .svg-icon-drm-steam {
 	fill: #c8cbca !important
 }
-img[alt="Steam"], .svg-icon-link {
+img[alt="Steam"], .svg-icon-link, .post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before {
 	filter: invert(1)
 }
 img[alt="Kinguin"] {
@@ -143,6 +153,11 @@ img[alt="Kinguin"] {
 .svg-icon.svg-icon-platform-playstation {
 	filter: brightness(3)
 }
+body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link,
+body.single-post .post-widget .nc .nc-links .meta-comments::before {
+	background: rgba(255,255,255,0.1)
+}
+
 .ggdeals-prices-widget .widget-header {
 	background-color: #002144
 }
