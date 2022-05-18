@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.1
+@version        1.0.2
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -78,7 +78,34 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 		background: txt
 	}
 }
-.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span {
+.ui-widget-content,
+.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
+.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
+	background: pbg	
+}
+.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-default, .prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-hover {
+	background: rgba(255, 255, 255, .1)
+	color: txt
+}
+.prices-table-widget table.prices-table.tablesorter-jui tbody tr.even,
+.prices-table-widget table.prices-table.tablesorter-jui tbody::before {
+	background: rgba(255, 255, 255, .03)
+}
+.tablesorter-jui input.tablesorter-filter, .tablesorter-jui select.tablesorter-filter {
+	background-color: pbg
+	border: 1px solid rgba(255, 255, 255, .1)
+	color: txt
+}
+.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td input.tablesorter-filter,
+.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td.promoted-filter .promoted-filter-button {
+	border: 1px solid rgba(255, 255, 255, .1)
+}
+.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager .btn>svg {
+	fill: txt
+}
+
+.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
+.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select {
 	color: txt
 }
 .breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
@@ -141,7 +168,8 @@ hr, .border-top, .footer-widget .section-divider {
 .svg-icon-drm-steam {
 	fill: #c8cbca !important
 }
-img[alt="Steam"], .svg-icon-link, .post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before {
+img[alt="Steam"], .svg-icon-link, .post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-widget .nc-tags svg, 
+.ui-state-active .ui-icon, .ui-state-default .ui-icon {
 	filter: invert(1)
 }
 img[alt="Kinguin"] {
