@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.2
+@version        1.0.3
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -114,7 +114,7 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 .arrow-nav:hover:after {
 	border-color: atxth !important
 }
-.post .nc-meta, .post .nc-submeta {
+.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link {
 	color: rgba(240, 248, 255, .7)
 }
 .sidebar-widget h3 a::after, .arrow-nav.next:after, .arrow-nav.prev:after {
@@ -124,7 +124,7 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 a, .media-heading > a {
 	color: atxt
 }
-a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover::after, .post-navigation .single-post-link:hover, .breadcrumbs-widget a:active, .breadcrumbs-widget a:focus, .breadcrumbs-widget a:hover, .post .nc-main .post-title a:hover {
+a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover::after, .post-navigation .single-post-link:hover, .breadcrumbs-widget a:active, .breadcrumbs-widget a:focus, .breadcrumbs-widget a:hover, .post .nc-main .post-title a:hover, .post .meta-comments .comments-link:hover, .post .meta-comments .comments-link:hover .svg-icon {
 	color: atxth
 	text-decoration: none
 }
