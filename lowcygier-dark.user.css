@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.3
+@version        1.0.4
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -105,8 +105,11 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 }
 
 .post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select {
+.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong {
 	color: txt
+}
+[style*="color: initial;"] {
+	color: txt !important
 }
 .breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
 	fill: txt
@@ -197,7 +200,7 @@ body.single-post .post-widget .nc .nc-links .meta-comments::before {
 	color: #fff
 }
 .ggdeals-prices-widget .see-more:hover {
-	background-color: #001730;
+	background-color: #001730
 }
 .ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
 	color: txt
