@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.4
+@version        1.0.5
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -105,7 +105,7 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 }
 
 .post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong {
+.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption {
 	color: txt
 }
 [style*="color: initial;"] {
@@ -166,13 +166,27 @@ a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover
 }
 hr, .border-top, .footer-widget .section-divider {
 	border-top: 1px solid rgba(255, 255, 255, .1) !important
-}
 
+}
+.socials-group-widget, .socials-group-widget.group-type-ps {
+	background: rgba(255, 255, 255, .1)
+}
+.socials-group-widget.group-type-xbox {
+	background: rgba(0, 255, 0, .1)
+}
+.socials-group-widget.group-type-nintendo {
+	background: rgba(255, 0, 0, .1)
+}
+.socials-group-widget.group-type-pc {
+	background-color: rgba(255, 165, 0, .1)
+}
+	
 .svg-icon-drm-steam {
 	fill: #c8cbca !important
 }
-img[alt="Steam"], .svg-icon-link, .post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-widget .nc-tags svg, 
-.ui-state-active .ui-icon, .ui-state-default .ui-icon {
+img[alt="Steam"], 
+.svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
+.post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-alert.post-alert-info .alert-prefix::before {
 	filter: invert(1)
 }
 img[alt="Kinguin"] {
