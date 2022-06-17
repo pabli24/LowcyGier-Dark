@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.5
+@version        1.0.6
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -105,7 +105,7 @@ body:not(.background-image) .intro .intro-background-fade-1 {
 }
 
 .post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption {
+.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago {
 	color: txt
 }
 [style*="color: initial;"] {
@@ -241,13 +241,13 @@ body.single-post .post-widget .nc .nc-links .meta-comments::before {
 	border-color: hbg
 }
 .btn-disabled, .btn-disabled:hover {
-	color: #fff;
+	color: #fff
 }
 .well {
 	border: 1px solid rgba(255, 255, 255, .1)
 }
 .platform, .numbers-stats {
-	color: txt;
+	color: txt
 }
 .pager-wrapper > li {
 	border-top: solid 3px rgba(255, 255, 255, .1)
@@ -286,5 +286,12 @@ body.single-post .post-widget .nc .nc-links .meta-comments::before {
 .form-group > select > option {
 	background-color: #010a14
 }
-
+}
+@-moz-document url-prefix("https://disqus.com/embed/comments/?base=default&f=lowcygier") {
+.post-content .post-menu .dropdown-toggle {
+	border-color: rgba(255, 255, 255, .05) !important
+}
+.post-votes .post-votes__separator {
+	border-right: 2px solid rgba(255, 255, 255, .05) !important
+}
 }
