@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.6
+@version        1.0.7
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
@@ -161,7 +161,7 @@ a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover
 .post-widget .nc-meta a:hover {
 	background: #1f2938
 }
-.post-alert {
+.post-alert, .alert.alert-grey {
 	background: rgba(255, 255, 255, .1) 
 }
 hr, .border-top, .footer-widget .section-divider {
@@ -184,7 +184,7 @@ hr, .border-top, .footer-widget .section-divider {
 .svg-icon-drm-steam {
 	fill: #c8cbca !important
 }
-img[alt="Steam"], 
+img[alt="Steam"], .gg-logo,
 .svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
 .post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-alert.post-alert-info .alert-prefix::before {
 	filter: invert(1)
