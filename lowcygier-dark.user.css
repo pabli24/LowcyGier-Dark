@@ -1,32 +1,81 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        1.0.7
+@version        2.0.0
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
 @homepageURL    https://github.com/pabli24/LowcyGier-Dark
 @supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
 @preprocessor   stylus
+@var            checkbox topb   "Ukryj górne menu (sociale, ggdeals, bazar itd.)"        0
 @var            checkbox kafle  "Ukryj kafelki"                                          0
-@var            color    hbg    "Kolor tła nagłówka"                                     #036
+@var            checkbox kafler "Ukryj Polecane przez Łowców"                            0
+@var            checkbox filtr  "Ukryj Filtry"                                           0
+@var            checkbox sze    "▼ Szerokość"                                            0
+@var            number   szepx  "Szerokość postów (px)"                                  ['px', 1480, 0, null]
+@var            number   szepx2 "Szerokość prawej kolumny (px)"                          ['px', 450, 0, null]
+@var            number   szeimg "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
+@var            checkbox dark   "▼ Ciemny styl (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)"  1
+@var            number   grd    "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
+@var            color    hbg    "Kolor tła górnego menu"                                 #036
+@var            color    hbg2   "Kolor tła górnego menu 2"                               rgba(255, 255, 255, .05)
 @var            color    bg     "Kolor tła"                                              #012
 @var            color    pbg    "Kolor tła postów"                                       #000f1f
 @var            color    txt    "Kolor tekstu"                                           #F0F8FF
+@var            color    txt    "Kolor tekstu"                                           #F0F8FF
 @var            color    atxt   "Kolor linków"                                           #7CB9E8
 @var            color    atxth  "Kolor linków po najechaniu"                             #007FFF
-@var            checkbox sb     "Pasek przewijania"                                      1
+@var            checkbox sb     "▼ Pasek przewijania"                                    1
 @var            color    sbc    "Kolor paska przewijania"                                #7CB9E8
 @var            color    sbch   "Kolor paska przewijania po najechaniu (tylko chromium)" #007FFF
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
 
+if topb {
+	.intro-top {
+		display: none
+	}
+}
+
 if kafle {
 	.tiles-container {
 		display: none
 	}
 }
+
+if kafler {
+	.recommended-posts-container {
+		display: none
+	}
+}
+
+if filtr {
+	.filters-widget {
+		display: none
+	}
+}
+
+if sze {
+	.container, .container-lg, .container-md, .container-sm, .container-xl {
+		max-width: szepx
+		flex: 0 0 szepx
+	}
+	.content .sidebar {
+		max-width: szepx2
+		flex: 0 0 szepx2
+	}
+	.row {
+		justify-content: center
+	}
+	.post-widget .big-img {
+		width: szeimg
+		margin-left: auto
+		margin-right: auto
+	}
+}
+
 if sb {
 	//chrome
 	::-webkit-scrollbar {
@@ -48,250 +97,321 @@ if sb {
 		scrollbar-width: thin !important
 	}
 }
-html, body, .main-container, .footer-widget {
-	background: bg
-	color: txt
-}
-body:not(.background-image) .intro {
-	background: hbg
-}
-body:not(.background-image) .intro .intro-background-fade-0 {
-	background: unset
-}
-body:not(.background-image) .intro .intro-background-fade-1 {
-	background: linear-gradient(0deg, bg 0%, hbg 100%)
-}
-.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn {
-	background-color: pbg
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5)
-}
-.discount-code {
-	border: 1px dashed rgba(255, 255, 255, .45)
-	background: pbg
-	&:hover, &:before {
-		background: #001b38
+if dark {
+	:root {color-scheme: dark}
+	html, body, .footer-widget {
+		background: bg !important
+		color: txt
 	}
-}
-.post .promos-box-wrapper {
-	background: pbg
-	ul li:before {
-		background: txt
+	.main-container {
+		background: rgba(0, 0, 0, 0) !important
 	}
-}
-.ui-widget-content,
-.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
-.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
-	background: pbg	
-}
-.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-default, .prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-hover {
-	background: rgba(255, 255, 255, .1)
-	color: txt
-}
-.prices-table-widget table.prices-table.tablesorter-jui tbody tr.even,
-.prices-table-widget table.prices-table.tablesorter-jui tbody::before {
-	background: rgba(255, 255, 255, .03)
-}
-.tablesorter-jui input.tablesorter-filter, .tablesorter-jui select.tablesorter-filter {
-	background-color: pbg
-	border: 1px solid rgba(255, 255, 255, .1)
-	color: txt
-}
-.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td input.tablesorter-filter,
-.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td.promoted-filter .promoted-filter-button {
-	border: 1px solid rgba(255, 255, 255, .1)
-}
-.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager .btn>svg {
-	fill: txt
-}
+	body .intro, .top-menu-wrapper,
+	.lg-theme-switcher .switch::before, .lg-theme-switcher .theme-switch-moon {
+		background: hbg
+	}
+	.main-menu-wrapper {
+		background: hbg2
+		border-top: 1px solid rgba(255, 255, 255, .1)
+		border-bottom: 1px solid rgba(255, 255, 255, .1)
+	}
+	body .intro:after {
+		content: ""
+		background: linear-gradient(0deg, bg 0%, hbg 100%)
+		position: absolute
+		width: 100%;
+		height: grd
+		margin-top: -12px
+	}
+	.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn {
+		background-color: pbg
+		color: txt
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5)
+	}
+	.header-widget #menu .search-widget .btn, .header-widget #menu .search-widget .form-control {
+		background: rgba(255, 255, 255, .1);
+		border: none;
+	}
+	.discount-code {
+		border: 1px dashed rgba(255, 255, 255, .45)
+		background: pbg
+		&:hover, &:before {
+			background: #001b38
+		}
+	}
+	.post .promos-box-wrapper {
+		background: pbg
+		ul li:before {
+			background: txt
+		}
+	}
+	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer,
+	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
+	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
+		background: pbg	
+	}
+	.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-default, .prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-hover {
+		background: rgba(255, 255, 255, .1)
+		color: txt
+	}
+	.prices-table-widget table.prices-table.tablesorter-jui tbody tr.even,
+	.prices-table-widget table.prices-table.tablesorter-jui tbody::before {
+		background: rgba(255, 255, 255, .03)
+	}
+	.tablesorter-jui input.tablesorter-filter, .tablesorter-jui select.tablesorter-filter {
+		background-color: pbg
+		border: 1px solid rgba(255, 255, 255, .1)
+		color: txt
+	}
+	.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td input.tablesorter-filter,
+	.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-filter-row td.promoted-filter .promoted-filter-button {
+		border: 1px solid rgba(255, 255, 255, .1)
+	}
+	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager .btn>svg {
+		fill: txt
+	}
 
-.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago {
-	color: txt
-}
-[style*="color: initial;"] {
-	color: txt !important
-}
-.breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
-	fill: txt
-}
-.arrow-nav:hover:after {
-	border-color: atxth !important
-}
-.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link {
-	color: rgba(240, 248, 255, .7)
-}
-.sidebar-widget h3 a::after, .arrow-nav.next:after, .arrow-nav.prev:after {
-	border: 1px solid txt
-	border-width: 2px 2px 0 0
-}
-a, .media-heading > a {
-	color: atxt
-}
-a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .discount-code:hover::after, .post-navigation .single-post-link:hover, .breadcrumbs-widget a:active, .breadcrumbs-widget a:focus, .breadcrumbs-widget a:hover, .post .nc-main .post-title a:hover, .post .meta-comments .comments-link:hover, .post .meta-comments .comments-link:hover .svg-icon {
-	color: atxth
-	text-decoration: none
-}
-.form-control, .form-control:focus, .search-widget .btn , .search-widget .btn:hover, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-	color: #fff
-	background-color: rgba(0, 0, 0, .2)
-	border: unset
-}
-.search-widget .btn svg {
-	fill: #fff
-}
-.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-	color: #fff
-	background-color: #002144
-	border-color: #002144
-}
-.btn-primary:hover {
-	color: #fff
-	background-color: #001730
-	border-color: #001730
-}
-.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
-	box-shadow: unset
-}
-.filters-widget .filtrowanie .btn {
-	border: unset
-}
-.post-widget .nc-meta a {
-	background: #243041
-}
-.post-widget .nc-meta a:hover {
-	background: #1f2938
-}
-.post-alert, .alert.alert-grey {
-	background: rgba(255, 255, 255, .1) 
-}
-hr, .border-top, .footer-widget .section-divider {
-	border-top: 1px solid rgba(255, 255, 255, .1) !important
+	.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
+	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a {
+		color: txt
+	}
+	[style*="color: initial;"] {
+		color: txt !important
+	}
+	.breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
+		fill: txt
+	}
+	.arrow-nav:hover:after {
+		border-color: atxth !important
+	}
+	.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link {
+		color: rgba(240, 248, 255, .7)
+	}
+	.sidebar-widget h3 a::after, .arrow-nav.next:after, .arrow-nav.prev:after {
+		border: 1px solid txt
+		border-width: 2px 2px 0 0
+	}
+	a, .media-heading > a, .post a, .sidebar-widget a {
+		color: atxt
+	}
+	a:hover, .post a:hover, .post .nc-meta a:hover, .post .nc-submeta a:hover, .sidebar-widget a:hover, .discount-code:hover::after, .post-navigation .single-post-link:hover, .breadcrumbs-widget a:active, .breadcrumbs-widget a:focus, .breadcrumbs-widget a:hover, .post .nc-main .post-title a:hover, .post .meta-comments .comments-link:hover, .post .meta-comments .comments-link:hover .svg-icon {
+		color: atxth
+		text-decoration: none
+	}
+	.form-control, .form-control:focus, .search-widget .btn , .search-widget .btn:hover, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+		color: #fff
+		background-color: rgba(0, 0, 0, .2)
+		border: unset
+	}
+	.search-widget .btn svg {
+		fill: #fff
+	}
+	.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+		color: #fff
+		background-color: #002144
+		border-color: #002144
+	}
+	.btn-primary:hover {
+		color: #fff
+		background-color: #001730
+		border-color: #001730
+	}
+	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
+		box-shadow: unset
+	}
+	.filters-widget .filtrowanie .btn {
+		border: unset
+	}
+	.post-widget .nc-meta a {
+		background: #243041
+	}
+	.post-widget .nc-meta a:hover {
+		background: #1f2938
+	}
+	.post-alert, .alert.alert-grey {
+		background: rgba(255, 255, 255, .1)
+	}
+	hr, .border-top, .footer-widget .section-divider, body.single-post .post-widget .border-top {
+		border-top: 1px solid rgba(255, 255, 255, .1) !important
+	}
+	.socials-group-widget, .socials-group-widget.group-type-ps {
+		background: rgba(255, 255, 255, .1)
+	}
+	.socials-group-widget.group-type-xbox {
+		background: rgba(0, 255, 0, .1)
+	}
+	.socials-group-widget.group-type-nintendo {
+		background: rgba(255, 0, 0, .1)
+	}
+	.socials-group-widget.group-type-pc {
+		background-color: rgba(255, 165, 0, .1)
+	}
 
-}
-.socials-group-widget, .socials-group-widget.group-type-ps {
-	background: rgba(255, 255, 255, .1)
-}
-.socials-group-widget.group-type-xbox {
-	background: rgba(0, 255, 0, .1)
-}
-.socials-group-widget.group-type-nintendo {
-	background: rgba(255, 0, 0, .1)
-}
-.socials-group-widget.group-type-pc {
-	background-color: rgba(255, 165, 0, .1)
-}
+	.svg-icon-drm-steam {
+		fill: #c8cbca !important
+	}
+	/*
+	img[alt="Steam"], .gg-logo,
+	.svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
+	.post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-alert.post-alert-info .alert-prefix::before {
+		filter: invert(1)
+	}
+	*/
+	.svg-icon-link {
+		filter: invert(1)
+	}
+	img[alt="Kinguin"] {
+		background: #ddd
+		border-radius: 10px !important
+		border: 5px solid #ddd
+		box-sizing: content-box
+	}
+	/*
+	.svg-icon.svg-icon-platform-playstation {
+		filter: brightness(3)
+	}
+	*/
+	body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link,
+	body.single-post .post-widget .nc .nc-links .meta-comments::before {
+		background: rgba(255,255,255,0.1)
+	}
+
+	.ggdeals-prices-widget .widget-header {
+		background-color: #002144
+	}
+	.ggdeals-prices-widget .price-row {
+		border: 1px solid rgba(255, 255, 255, .1)
+	}
+	.ggdeals-prices-widget .see-more {
+		background-color: #002144
+		color: #fff
+	}
+	.ggdeals-prices-widget .see-more:hover {
+		background-color: #001730
+	}
+	.ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
+		color: txt
+	}
+
+	.pagination-widget ul .current {
+		background-color: rgba(255, 255, 255, .05)
+		border-color: rgba(255, 255, 255, .05)
+		color: txt
+	}
+	.pagination-widget ul a {
+		border: 1px solid rgba(255, 255, 255, .05)
+	}
+	.pagination-widget ul a, .pagination-widget ul span {
+		color: txt
+		background: unset
+	}
+	.pagination-widget ul a:hover {
+		background-color: rgba(255, 255, 255, .05)
+		border-color: rgba(255, 255, 255, .05)
+	}
+	/*
+	.pagination-widget ul li:first-child a::before, .pagination-widget ul li:last-child a::after {
+		filter: invert(1)
+	}
+	*/
+
+	// bazar
+	.navbar-inverse {
+		background-color: hbg
+		border-color: hbg
+	}
+	.btn-disabled, .btn-disabled:hover {
+		color: #fff
+	}
+	.well {
+		border: 1px solid rgba(255, 255, 255, .1)
+	}
+	.platform, .numbers-stats {
+		color: txt
+	}
+	.pager-wrapper > li {
+		border-top: solid 3px rgba(255, 255, 255, .1)
+	}
+	.row.vertical-divider div[class^="col-"]:first-child {
+		border-left: 1px solid rgba(255, 255, 255, .1)
+	}
+	.row.vertical-divider > div[class^="col-"] {
+		border-left: 1px solid rgba(255, 255, 255, .1)
+	}
+	.row.vertical-divider div[class^="col-"]:last-child {
+		border-right: 1px solid rgba(255, 255, 255, .1)
+	}
+	.myactive > a {
+		color: #fff !important
+	}
+	.easy-autocomplete input {
+		border-color: #010a14
+		color: #fff
+	}
+	.easy-autocomplete-container ul li.selected {
+		background: none repeat scroll 0 0 #00060d
+	}
+	.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+		background: #010a14
+		border-color: rgba(255, 255, 255, .1)
+	}
+	.dropdown-menu {
+		background-color: #010a14
+	}
+	.btn-default {
+		color: #fff !important
+		background-color: rgba(0,0,0,0.2) !important
+		border-color: #010a14 !important
+	}
+	.form-group > select > option {
+		background-color: #010a14
+	}
 	
-.svg-icon-drm-steam {
-	fill: #c8cbca !important
-}
-img[alt="Steam"], .gg-logo,
-.svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
-.post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-alert.post-alert-info .alert-prefix::before {
-	filter: invert(1)
-}
-img[alt="Kinguin"] {
-	background: #ddd
-	border-radius: 10px !important
-	border: 5px solid #ddd
-	box-sizing: content-box
-}
-.svg-icon.svg-icon-platform-playstation {
-	filter: brightness(3)
-}
-body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link,
-body.single-post .post-widget .nc .nc-links .meta-comments::before {
-	background: rgba(255,255,255,0.1)
+	//disqus
+	body > #message {
+		border: 2px solid rgba(255, 255, 255, .05)
+		background: rgba(255, 255, 255, .05)
+		color: #fff
+	}
 }
 
-.ggdeals-prices-widget .widget-header {
-	background-color: #002144
-}
-.ggdeals-prices-widget .price-row {
-	border: 1px solid rgba(255, 255, 255, .1)
-}
-.ggdeals-prices-widget .see-more {
-	background-color: #002144
-	color: #fff
-}
-.ggdeals-prices-widget .see-more:hover {
-	background-color: #001730
-}
-.ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
-	color: txt
-}
-
-.pagination-widget ul a, .pagination-widget ul span {
-	color: txt
-	background: unset
-}
-.pagination-widget ul a {
-	border: 1px solid #13293d
-}
-.pagination-widget ul a:hover {
-	background-color: #13293d
-	border-color: #13293d
-}
-.pagination-widget ul li:first-child a::before, .pagination-widget ul li:last-child a::after {
-	filter: invert(1)
-}
-
-// bazar
-.navbar-inverse {
-	background-color: hbg
-	border-color: hbg
-}
-.btn-disabled, .btn-disabled:hover {
-	color: #fff
-}
-.well {
-	border: 1px solid rgba(255, 255, 255, .1)
-}
-.platform, .numbers-stats {
-	color: txt
-}
-.pager-wrapper > li {
-	border-top: solid 3px rgba(255, 255, 255, .1)
-}
-.row.vertical-divider div[class^="col-"]:first-child {
-	border-left: 1px solid rgba(255, 255, 255, .1)
-}
-.row.vertical-divider > div[class^="col-"] {
-	border-left: 1px solid rgba(255, 255, 255, .1)
-}
-.row.vertical-divider div[class^="col-"]:last-child {
-	border-right: 1px solid rgba(255, 255, 255, .1)
-}
-.myactive > a {
-	color: #fff !important
-}
-.easy-autocomplete input {
-	border-color: #010a14
-	color: #fff
-}
-.easy-autocomplete-container ul li.selected {
-	background: none repeat scroll 0 0 #00060d
-}
-.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
-	background: #010a14
-	border-color: rgba(255, 255, 255, .1)
-}
-.dropdown-menu {
-	background-color: #010a14
-}
-.btn-default {
-	color: #fff !important
-	background-color: rgba(0,0,0,0.2) !important
-	border-color: #010a14 !important
-}
-.form-group > select > option {
-	background-color: #010a14
-}
 }
 @-moz-document url-prefix("https://disqus.com/embed/comments/?base=default&f=lowcygier") {
-.post-content .post-menu .dropdown-toggle {
-	border-color: rgba(255, 255, 255, .05) !important
+
+if dark {
+	:root {color-scheme: dark}
+	html, body {
+		background: pbg !important
+		color: txt
+	}
+	.post-content .post-menu .dropdown-toggle {
+		border-color: rgba(255, 255, 255, .05) !important
+	}
+	.post-votes .post-votes__separator {
+		border-right: 2px solid rgba(255, 255, 255, .05) !important
+	}
+	.alert.alert--realtime, .alert.info, .alert.success, .dark .alert.alert--realtime, .dark .alert.info, .dark .alert.success {
+		background: rgba(255, 255, 255, .05)
+	}
+	.dark .load-more__button {
+		background: rgba(255, 255, 255, .05)
+		color: #fff
+	}
+	.dark .load-more__button:hover {
+		background: rgba(255, 255, 255, .1)
+		color: #fff
+	}
 }
-.post-votes .post-votes__separator {
-	border-right: 2px solid rgba(255, 255, 255, .05) !important
+
 }
+@-moz-document url-prefix("https://disqus.com/recommendations/?base=default&f=lowcygier") {
+
+if dark {
+	:root {color-scheme: dark}
+	html, body {
+		background: bg !important
+		color: txt
+	}
+}
+
 }
