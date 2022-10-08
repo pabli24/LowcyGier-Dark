@@ -1,59 +1,73 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.0.0
+@version        2.0.1
 @description    Ciemny styl dla Łowcy Gier i bazaru
 @author         Pabli
 @license        MIT
 @homepageURL    https://github.com/pabli24/LowcyGier-Dark
 @supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
 @preprocessor   stylus
-@var            checkbox topb   "Ukryj górne menu (sociale, ggdeals, bazar itd.)"        0
-@var            checkbox kafle  "Ukryj kafelki"                                          0
-@var            checkbox kafler "Ukryj Polecane przez Łowców"                            0
-@var            checkbox filtr  "Ukryj Filtry"                                           0
-@var            checkbox sze    "▼ Szerokość"                                            0
-@var            number   szepx  "Szerokość postów (px)"                                  ['px', 1480, 0, null]
-@var            number   szepx2 "Szerokość prawej kolumny (px)"                          ['px', 450, 0, null]
-@var            number   szeimg "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
-@var            checkbox dark   "▼ Ciemny styl (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)"  1
-@var            number   grd    "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
-@var            color    hbg    "Kolor tła górnego menu"                                 #036
-@var            color    hbg2   "Kolor tła górnego menu 2"                               rgba(255, 255, 255, .05)
-@var            color    bg     "Kolor tła"                                              #012
-@var            color    pbg    "Kolor tła postów"                                       #000f1f
-@var            color    txt    "Kolor tekstu"                                           #F0F8FF
-@var            color    txt    "Kolor tekstu"                                           #F0F8FF
-@var            color    atxt   "Kolor linków"                                           #7CB9E8
-@var            color    atxth  "Kolor linków po najechaniu"                             #007FFF
-@var            checkbox sb     "▼ Pasek przewijania"                                    1
-@var            color    sbc    "Kolor paska przewijania"                                #7CB9E8
-@var            color    sbch   "Kolor paska przewijania po najechaniu (tylko chromium)" #007FFF
+
+@var            checkbox dark     "▼ Ciemny styl ▼ (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)" 1
+@var            number   grd      "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
+@var            color    hbg      "Kolor tła górnego menu i gradientu"                     #036
+@var            color    hbg2     "Kolor tła głównego górnego menu"                        rgba(255, 255, 255, .05)
+@var            color    bg       "Kolor tła"                                              #012
+@var            color    pbg      "Kolor tła postów"                                       #000f1f
+@var            color    txt      "Kolor tekstu"                                           #F0F8FF
+@var            color    txt      "Kolor tekstu"                                           #F0F8FF
+@var            color    atxt     "Kolor linków"                                           #7CB9E8
+@var            color    atxth    "Kolor linków po najechaniu"                             #007FFF
+
+@var            checkbox sb       "▼ Pasek przewijania ▼"                                  1
+@var            color    sbc      "Kolor paska przewijania"                                #7CB9E8
+@var            color    sbch     "Kolor paska przewijania po najechaniu (tylko chromium)" #007FFF
+
+@var            number   a0       "▼ UKRYJ ▼"                                              [0,0,0]
+@var            checkbox u-topb   "Górne menu (sociale, ggdeals, bazar itd.)"              0
+@var            checkbox u-kafle  "Kafelki"                                                0
+@var            checkbox u-kafler "Polecane przez Łowców"                                  0
+@var            checkbox u-filtr  "Filtry"                                                 0
+@var            checkbox u-ggd    "Tanie doładowania playstation"                          0
+@var            checkbox u-ro     "Ranking ofert"                                          0
+@var            checkbox u-gzd    "Gry za darmo"                                           0
+@var            checkbox u-pub    "Publicystyka"                                           0
+@var            checkbox u-onf    "Ostatnio na forum"                                      0
+@var            checkbox u-ddn    "Dołącz do nas na"                                       0
+@var            checkbox u-ads    "Reklamy"                                                0
+
+@var            checkbox sze      "▼ Szerokość ▼"                                          0
+@var            number   szepx    "Szerokość postów (px)"                                  ['px', 1480, 0, null]
+@var            number   szepx2   "Szerokość prawej kolumny (px)"                          ['px', 450, 0, null]
+@var            number   szeimg   "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
+
+@var            number   a1       "▼ INNE ▼"                                               [0,0,0]
+@var            checkbox gryt     "Przenieś 'ᗧ Gry za darmo' na górę"                      0
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
 
-if topb {
-	.intro-top {
-		display: none
-	}
-}
+if u-topb   {.intro-top                                     {display: none}}
+if u-kafle  {.tiles-container                               {display: none}}
+if u-kafler {.recommended-posts-container                   {display: none}}
+if u-filtr  {.filters-widget                                {display: none}}
+if u-ggd    {.ggdeals-sidebar-prices-widget                 {display: none}}
+if u-ro     {.sidebar-widget:has(.svg-icon-icon-trophy)     {display: none}}
+if u-gzd    {.sidebar-widget:has(.svg-icon-icon-pacman)     {display: none}}
+if u-pub    {.sidebar-widget:has(.svg-icon-icon-news-side)  {display: none}}
+if u-onf    {.forum-posts-widget                            {display: none}}
+if u-ddn    {.socials-widget                                {display: none}}
+if u-ads    {.moneymaker-container, .moneymaker-widget      {display: none !important}}
 
-if kafle {
-	.tiles-container {
-		display: none
-	}
-}
 
-if kafler {
-	.recommended-posts-container {
-		display: none
+if topg {
+	.sidebar__inner {
+		display: flex;
+		flex-direction: column;
 	}
-}
-
-if filtr {
-	.filters-widget {
-		display: none
+	.sidebar-widget:has(.svg-icon-icon-pacman) {
+		order: -1
 	}
 }
 
@@ -75,6 +89,7 @@ if sze {
 		margin-right: auto
 	}
 }
+
 
 if sb {
 	//chrome
@@ -140,12 +155,13 @@ if dark {
 		}
 	}
 	.post .promos-box-wrapper {
-		background: pbg
+		background: rgba(255, 255, 255, 0)
+		border: 1px solid rgba(255, 255, 255, .1)
 		ul li:before {
 			background: txt
 		}
 	}
-	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer,
+	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
 		background: pbg	
@@ -198,6 +214,7 @@ if dark {
 		color: atxth
 		text-decoration: none
 	}
+	/*
 	.form-control, .form-control:focus, .search-widget .btn , .search-widget .btn:hover, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
 		color: #fff
 		background-color: rgba(0, 0, 0, .2)
@@ -216,18 +233,21 @@ if dark {
 		background-color: #001730
 		border-color: #001730
 	}
+	 */
 	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
 		box-shadow: unset
 	}
 	.filters-widget .filtrowanie .btn {
 		border: unset
 	}
+	/*
 	.post-widget .nc-meta a {
 		background: #243041
 	}
 	.post-widget .nc-meta a:hover {
 		background: #1f2938
 	}
+	 */
 	.post-alert, .alert.alert-grey {
 		background: rgba(255, 255, 255, .1)
 	}
@@ -247,9 +267,9 @@ if dark {
 		background-color: rgba(255, 165, 0, .1)
 	}
 
-	.svg-icon-drm-steam {
+/* 	.svg-icon-drm-steam {
 		fill: #c8cbca !important
-	}
+	} */
 	/*
 	img[alt="Steam"], .gg-logo,
 	.svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
@@ -260,12 +280,14 @@ if dark {
 	.svg-icon-link {
 		filter: invert(1)
 	}
+	/*
 	img[alt="Kinguin"] {
 		background: #ddd
 		border-radius: 10px !important
 		border: 5px solid #ddd
 		box-sizing: content-box
 	}
+	*/	
 	/*
 	.svg-icon.svg-icon-platform-playstation {
 		filter: brightness(3)
@@ -277,17 +299,17 @@ if dark {
 	}
 
 	.ggdeals-prices-widget .widget-header {
-		background-color: #002144
+		background-color: rgba(255, 255, 255, .1)
 	}
 	.ggdeals-prices-widget .price-row {
 		border: 1px solid rgba(255, 255, 255, .1)
 	}
 	.ggdeals-prices-widget .see-more {
-		background-color: #002144
-		color: #fff
+		background-color: rgba(255, 255, 255, .1)
+		color: txt
 	}
 	.ggdeals-prices-widget .see-more:hover {
-		background-color: #001730
+		background-color: rgba(255, 255, 255, .05)
 	}
 	.ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
 		color: txt
