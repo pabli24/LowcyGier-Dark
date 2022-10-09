@@ -1,24 +1,26 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.0.1
-@description    Ciemny styl dla Łowcy Gier i bazaru
+@version        2.0.2
+@description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
 @homepageURL    https://github.com/pabli24/LowcyGier-Dark
 @supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
-@preprocessor   stylus
 
+@preprocessor   stylus
 @var            checkbox dark     "▼ Ciemny styl ▼ (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)" 1
 @var            number   grd      "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
 @var            color    hbg      "Kolor tła górnego menu i gradientu"                     #036
 @var            color    hbg2     "Kolor tła głównego górnego menu"                        rgba(255, 255, 255, .05)
 @var            color    bg       "Kolor tła"                                              #012
-@var            color    pbg      "Kolor tła postów"                                       #000f1f
+@var            color    pbg      "Kolor tła postów"                                       #001933
 @var            color    txt      "Kolor tekstu"                                           #F0F8FF
-@var            color    txt      "Kolor tekstu"                                           #F0F8FF
+@var            color    txt2     "Kolor tekstu 2"                                         rgba(240,248,255,0.7)
 @var            color    atxt     "Kolor linków"                                           #7CB9E8
 @var            color    atxth    "Kolor linków po najechaniu"                             #007FFF
+@var            color    btn      "Kolor przycisków"                                       rgba(0, 172, 255, .2)
+@var            color    btnh     "Kolor przycisków po najechaniu"                         rgba(0, 172, 255, .3)
 
 @var            checkbox sb       "▼ Pasek przewijania ▼"                                  1
 @var            color    sbc      "Kolor paska przewijania"                                #7CB9E8
@@ -26,16 +28,16 @@
 
 @var            number   a0       "▼ UKRYJ ▼"                                              [0,0,0]
 @var            checkbox u-topb   "Górne menu (sociale, ggdeals, bazar itd.)"              0
-@var            checkbox u-kafle  "Kafelki"                                                0
-@var            checkbox u-kafler "Polecane przez Łowców"                                  0
-@var            checkbox u-filtr  "Filtry"                                                 0
-@var            checkbox u-ggd    "Tanie doładowania playstation"                          0
-@var            checkbox u-ro     "Ranking ofert"                                          0
-@var            checkbox u-gzd    "Gry za darmo"                                           0
-@var            checkbox u-pub    "Publicystyka"                                           0
-@var            checkbox u-onf    "Ostatnio na forum"                                      0
-@var            checkbox u-ddn    "Dołącz do nas na"                                       0
-@var            checkbox u-ads    "Reklamy"                                                0
+@var            checkbox u-kafle  "▯⊟⊟ Kafelki"                                         0
+@var            checkbox u-kafler "❤️ Polecane przez Łowców"                               0
+@var            checkbox u-filtr  "⫸ Filtry"                                              0
+@var            checkbox u-ggd    "🎮 Tanie doładowania playstation"                       0
+@var            checkbox u-ro     "🏆 Ranking ofert"                                       0
+@var            checkbox u-gzd    "🟡 Gry za darmo"                                        0
+@var            checkbox u-pub    "📰 Publicystyka"                                        0
+@var            checkbox u-onf    "💬 Ostatnio na forum"                                   0
+@var            checkbox u-ddn    "👍 Dołącz do nas na"                                    0
+@var            checkbox u-ads    "💸 Reklamy"                                             0
 
 @var            checkbox sze      "▼ Szerokość ▼"                                          0
 @var            number   szepx    "Szerokość postów (px)"                                  ['px', 1480, 0, null]
@@ -43,25 +45,24 @@
 @var            number   szeimg   "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
 
 @var            number   a1       "▼ INNE ▼"                                               [0,0,0]
-@var            checkbox gryt     "Przenieś 'ᗧ Gry za darmo' na górę"                      0
+@var            checkbox t-gzd    "Przenieś '🟡 Gry za darmo' na górę"                     0
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
 
-if u-topb   {.intro-top                                     {display: none}}
-if u-kafle  {.tiles-container                               {display: none}}
-if u-kafler {.recommended-posts-container                   {display: none}}
-if u-filtr  {.filters-widget                                {display: none}}
-if u-ggd    {.ggdeals-sidebar-prices-widget                 {display: none}}
-if u-ro     {.sidebar-widget:has(.svg-icon-icon-trophy)     {display: none}}
-if u-gzd    {.sidebar-widget:has(.svg-icon-icon-pacman)     {display: none}}
-if u-pub    {.sidebar-widget:has(.svg-icon-icon-news-side)  {display: none}}
-if u-onf    {.forum-posts-widget                            {display: none}}
-if u-ddn    {.socials-widget                                {display: none}}
+if u-topb   {.intro-top                                     {display: none !important}}
+if u-kafle  {.tiles-container                               {display: none !important}}
+if u-kafler {.recommended-posts-container                   {display: none !important}}
+if u-filtr  {.filters-widget                                {display: none !important}}
+if u-ggd    {.ggdeals-sidebar-prices-widget                 {display: none !important}}
+if u-ro     {.sidebar-widget:has(.svg-icon-icon-trophy)     {display: none !important}}
+if u-gzd    {.sidebar-widget:has(.svg-icon-icon-pacman)     {display: none !important}}
+if u-pub    {.sidebar-widget:has(.svg-icon-icon-news-side)  {display: none !important}}
+if u-onf    {.forum-posts-widget                            {display: none !important}}
+if u-ddn    {.socials-widget                                {display: none !important}}
 if u-ads    {.moneymaker-container, .moneymaker-widget      {display: none !important}}
 
-
-if topg {
+if t-gzd {
 	.sidebar__inner {
 		display: flex;
 		flex-direction: column;
@@ -138,20 +139,34 @@ if dark {
 		height: grd
 		margin-top: -12px
 	}
+	.post .btn-primary,
+	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-bottom .gg-prices-cta-btn {
+		background: btn;
+		color: txt;
+	}
+	.post .btn-primary:hover,
+	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-bottom .gg-prices-cta-btn:hover {
+		color: txt;
+		background-color: btnh;
+	}
+	.btn-outline-secondary:hover {
+		color: txt;
+		background: rgba(255, 255, 255, .1);
+		border-color: rgba(255, 255, 255, .1);
+	}
 	.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn {
 		background-color: pbg
 		color: txt
-		box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5)
 	}
 	.header-widget #menu .search-widget .btn, .header-widget #menu .search-widget .form-control {
-		background: rgba(255, 255, 255, .1);
+		background: rgba(255, 255, 255, .05);
 		border: none;
 	}
 	.discount-code {
 		border: 1px dashed rgba(255, 255, 255, .45)
 		background: pbg
 		&:hover, &:before {
-			background: #001b38
+			background: rgba(255, 255, 255, .3)
 		}
 	}
 	.post .promos-box-wrapper {
@@ -161,7 +176,7 @@ if dark {
 			background: txt
 		}
 	}
-	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper,
+	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper, .similar-posts-wrapper .similar-post-single .similar-post-footer,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
 		background: pbg	
@@ -186,7 +201,7 @@ if dark {
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager .btn>svg {
 		fill: txt
 	}
-
+	
 	.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
 	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a {
 		color: txt
@@ -200,8 +215,9 @@ if dark {
 	.arrow-nav:hover:after {
 		border-color: atxth !important
 	}
-	.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link {
-		color: rgba(240, 248, 255, .7)
+	.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link,
+	.sidebar .entry .comments-indicator {
+		color: txt2
 	}
 	.sidebar-widget h3 a::after, .arrow-nav.next:after, .arrow-nav.prev:after {
 		border: 1px solid txt
@@ -214,40 +230,60 @@ if dark {
 		color: atxth
 		text-decoration: none
 	}
-	/*
-	.form-control, .form-control:focus, .search-widget .btn , .search-widget .btn:hover, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-		color: #fff
-		background-color: rgba(0, 0, 0, .2)
-		border: unset
+	
+	.tags-list .tag.category {
+		background: rgba(255, 255, 255, .1);
+		color: txt;
+		&:hover {
+			background: rgba(255, 255, 255, .15);
+		}
 	}
-	.search-widget .btn svg {
-		fill: #fff
+	
+	.filters-widget .shortcuts-container, .filters-widget .filters-container, .filters-widget .filters-container .search-widget {
+		background: pbg;
 	}
-	.btn-primary, .btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-		color: #fff
-		background-color: #002144
-		border-color: #002144
+	.filters-widget .filters-container .filter-dropdown-trigger {
+		border-right: 1px solid rgba(255, 255, 255, 0);
+		color: txt;
+		&:hover {
+			background: rgba(255, 255, 255, .05);
+		}
 	}
-	.btn-primary:hover {
-		color: #fff
-		background-color: #001730
-		border-color: #001730
+	.input-group {
+		background: rgba(255, 255, 255, .05);
 	}
-	 */
+	.btn-secondary {
+		color: txt;
+		background-color: rgba(255, 255, 255, .05);
+		border-color: rgba(255, 255, 255, .05);
+	}
+	.form-control {
+		^[0], &:focus, &:active, &:hover {
+			color: txt;
+			background-color: rgba(255, 255, 255, .05);
+			border: 0px solid rgba(255, 255, 255, .05) !important;
+		}
+	}
+	.search-widget .btn {
+		^[0], &:focus, &:active, &:hover {
+			background-color: rgba(255, 255, 255, .05) !important;
+			border-color: rgba(255, 255, 255, .05) !important;
+		}
+	}
+	.filters-widget .filters-container .search-widget .btn .svg-icon {
+		fill: txt;
+	}
+	.filters-widget .filters-container .filters-dropdown-content, .filters-widget .filters-container.show .filter-dropdown-trigger {
+		background: pbg;
+	}
+	
 	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
 		box-shadow: unset
 	}
 	.filters-widget .filtrowanie .btn {
 		border: unset
 	}
-	/*
-	.post-widget .nc-meta a {
-		background: #243041
-	}
-	.post-widget .nc-meta a:hover {
-		background: #1f2938
-	}
-	 */
+	
 	.post-alert, .alert.alert-grey {
 		background: rgba(255, 255, 255, .1)
 	}
@@ -266,38 +302,25 @@ if dark {
 	.socials-group-widget.group-type-pc {
 		background-color: rgba(255, 165, 0, .1)
 	}
-
-/* 	.svg-icon-drm-steam {
-		fill: #c8cbca !important
-	} */
-	/*
-	img[alt="Steam"], .gg-logo,
-	.svg-icon-link, .post-widget .nc-tags svg, .ui-state-active .ui-icon, .ui-state-default .ui-icon, 
-	.post-updated-time-label::before, .post-alert.post-alert-update .alert-prefix::before, .post-alert.post-alert-info .alert-prefix::before {
-		filter: invert(1)
-	}
-	*/
+	
 	.svg-icon-link {
 		filter: invert(1)
 	}
-	/*
-	img[alt="Kinguin"] {
-		background: #ddd
-		border-radius: 10px !important
-		border: 5px solid #ddd
-		box-sizing: content-box
-	}
-	*/	
-	/*
-	.svg-icon.svg-icon-platform-playstation {
-		filter: brightness(3)
-	}
-	*/
+	
 	body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link,
 	body.single-post .post-widget .nc .nc-links .meta-comments::before {
 		background: rgba(255,255,255,0.1)
 	}
-
+	body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link:hover {
+		background: rgba(255,255,255,0.2);
+	}
+	.socials-share-widget .btn-icon.facebook .svg-icon, .socials-share-widget .btn-icon.twitter .svg-icon {
+		fill: rgba(255, 255, 255, .6);
+	}
+	.socials-share-widget .btn-icon.twitter:focus .svg-icon, .socials-share-widget .btn-icon.twitter:hover .svg-icon,
+	.socials-share-widget .btn-icon.facebook:focus .svg-icon, .socials-share-widget .btn-icon.facebook:hover .svg-icon {
+		fill: rgba(255, 255, 255, .9);
+	}
 	.ggdeals-prices-widget .widget-header {
 		background-color: rgba(255, 255, 255, .1)
 	}
@@ -314,7 +337,7 @@ if dark {
 	.ggdeals-prices-widget .widget-header .game-name, .ggdeals-prices-widget .widget-header .game-stats .collection-status, .ggdeals-prices-widget .widget-header .game-intro {
 		color: txt
 	}
-
+	
 	.pagination-widget ul .current {
 		background-color: rgba(255, 255, 255, .05)
 		border-color: rgba(255, 255, 255, .05)
@@ -331,12 +354,18 @@ if dark {
 		background-color: rgba(255, 255, 255, .05)
 		border-color: rgba(255, 255, 255, .05)
 	}
-	/*
-	.pagination-widget ul li:first-child a::before, .pagination-widget ul li:last-child a::after {
-		filter: invert(1)
+	
+	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-inner-tabs-content .gg-prices-inner-tab-content .gg-prices-offers-list .gg-prices-offer-row .gg-prices-offer-tags .gg-prices-offer-tag {
+		background: rgba(255, 255, 255, .05);
+		color: txt;
+		border: 1px dashed rgba(255, 255, 255, .2);
 	}
-	*/
-
+	
+	.sidebar-widget h3, .sidebar .forum-posts-widget .entry {
+		border-bottom: 1px solid rgba(255, 255, 255, .2);
+		color: rgba(255,255,255,.8);
+	}
+	
 	// bazar
 	.navbar-inverse {
 		background-color: hbg
@@ -403,25 +432,47 @@ if dark {
 if dark {
 	:root {color-scheme: dark}
 	html, body {
-		background: pbg !important
-		color: txt
+		background: pbg !important;
+		color: txt;
 	}
 	.post-content .post-menu .dropdown-toggle {
-		border-color: rgba(255, 255, 255, .05) !important
+		border-color: rgba(255, 255, 255, .05) !important;
 	}
 	.post-votes .post-votes__separator {
-		border-right: 2px solid rgba(255, 255, 255, .05) !important
+		border-right: 2px solid rgba(255, 255, 255, .05) !important;
 	}
 	.alert.alert--realtime, .alert.info, .alert.success, .dark .alert.alert--realtime, .dark .alert.info, .dark .alert.success {
-		background: rgba(255, 255, 255, .05)
+		background: rgba(255, 255, 255, .05);
 	}
 	.dark .load-more__button {
-		background: rgba(255, 255, 255, .05)
-		color: #fff
+		background: rgba(255, 255, 255, .05);
+		color: txt;
 	}
 	.dark .load-more__button:hover {
-		background: rgba(255, 255, 255, .1)
-		color: #fff
+		background: rgba(255, 255, 255, .05);
+		color: txt;
+	}
+	.textarea {
+		color: txt;
+	}
+	.textarea-outer-wrapper .textarea-wrapper {
+		background: rgba(255, 255, 255, .05);
+		border: 2px solid rgba(255, 255, 255, .05);
+	}
+	.dark .input--text {
+		color: txt;
+		background: rgba(255, 255, 255, .05);
+		border-color: rgba(255, 255, 255, .05);
+	}
+	.post-actions {
+		background: rgba(255, 255, 255, .05);
+		border-top: solid 2px rgba(255, 255, 255, .05);
+	}
+	.wysiwyg .vertical-separator {
+		border-right: 2px solid rgba(255, 255, 255, .05);
+	}
+	.wysiwyg__item {	
+		filter: brightness(10);
 	}
 }
 
@@ -431,8 +482,8 @@ if dark {
 if dark {
 	:root {color-scheme: dark}
 	html, body {
-		background: bg !important
-		color: txt
+		background: bg !important;
+		color: txt;
 	}
 }
 
