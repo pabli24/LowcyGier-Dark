@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.0.2
+@version        2.0.3
 @description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
@@ -119,8 +119,11 @@ if dark {
 		background: bg !important
 		color: txt
 	}
-	.main-container {
+	.main-container, body.background-image .intro::before, .top-background {
 		background: rgba(0, 0, 0, 0) !important
+	}
+	.top-background {
+		display: none !important
 	}
 	body .intro, .top-menu-wrapper,
 	.lg-theme-switcher .switch::before, .lg-theme-switcher .theme-switch-moon {
@@ -154,7 +157,7 @@ if dark {
 		background: rgba(255, 255, 255, .1);
 		border-color: rgba(255, 255, 255, .1);
 	}
-	.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn {
+	.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn, .alert.alert-post {
 		background-color: pbg
 		color: txt
 	}
