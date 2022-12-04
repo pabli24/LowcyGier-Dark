@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.0.3
+@version        2.0.4
 @description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
@@ -40,8 +40,8 @@
 @var            checkbox u-ads    "💸 Reklamy"                                             0
 
 @var            checkbox sze      "▼ Szerokość ▼"                                          0
-@var            number   szepx    "Szerokość postów (px)"                                  ['px', 1480, 0, null]
-@var            number   szepx2   "Szerokość prawej kolumny (px)"                          ['px', 450, 0, null]
+@var            number   szepx    "Szerokość postów (px)"                                  ['px', 1000, 0, null]
+@var            number   szepx2   "Szerokość prawej kolumny (px)"                          ['px', 400, 0, null]
 @var            number   szeimg   "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
 
 @var            number   a1       "▼ INNE ▼"                                               [0,0,0]
@@ -73,7 +73,10 @@ if t-gzd {
 }
 
 if sze {
-	.container, .container-lg, .container-md, .container-sm, .container-xl {
+	.main-container {
+		max-width: unset !important;
+	}
+	.content-column {
 		max-width: szepx
 		flex: 0 0 szepx
 	}
@@ -141,6 +144,9 @@ if dark {
 		width: 100%;
 		height: grd
 		margin-top: -12px
+	}
+	body.background-image.background-screening .intro {
+		margin-bottom: 0 !important;
 	}
 	.post .btn-primary,
 	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-bottom .gg-prices-cta-btn {
