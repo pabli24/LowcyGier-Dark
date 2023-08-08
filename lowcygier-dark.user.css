@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.0.4
+@version        2.1.0
 @description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
@@ -12,7 +12,7 @@
 @var            checkbox dark     "▼ Ciemny styl ▼ (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)" 1
 @var            number   grd      "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
 @var            color    hbg      "Kolor tła górnego menu i gradientu"                     #036
-@var            color    hbg2     "Kolor tła głównego górnego menu"                        rgba(255, 255, 255, .05)
+@var            color    hbg2     "Kolor tła głównego górnego menu"                        #0d3d6e
 @var            color    bg       "Kolor tła"                                              #012
 @var            color    pbg      "Kolor tła postów"                                       #001933
 @var            color    txt      "Kolor tekstu"                                           #F0F8FF
@@ -29,7 +29,6 @@
 @var            number   a0       "▼ UKRYJ ▼"                                              [0,0,0]
 @var            checkbox u-topb   "Górne menu (sociale, ggdeals, bazar itd.)"              0
 @var            checkbox u-kafle  "▯⊟⊟ Kafelki"                                         0
-@var            checkbox u-kafler "❤️ Polecane przez Łowców"                               0
 @var            checkbox u-filtr  "⫸ Filtry"                                              0
 @var            checkbox u-ggd    "🎮 Tanie doładowania playstation"                       0
 @var            checkbox u-ro     "🏆 Ranking ofert"                                       0
@@ -42,17 +41,16 @@
 @var            checkbox sze      "▼ Szerokość ▼"                                          0
 @var            number   szepx    "Szerokość postów (px)"                                  ['px', 1000, 0, null]
 @var            number   szepx2   "Szerokość prawej kolumny (px)"                          ['px', 400, 0, null]
-@var            number   szeimg   "Szerokość obrazów (%)"                                  ['%', 50, 0, 100]
 
 @var            number   a1       "▼ INNE ▼"                                               [0,0,0]
 @var            checkbox t-gzd    "Przenieś '🟡 Gry za darmo' na górę"                     0
+@var            checkbox unpinNav "Odepnij górny pasek nawigacyjny"                        0
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
 
 if u-topb   {.intro-top                                     {display: none !important}}
-if u-kafle  {.tiles-container                               {display: none !important}}
-if u-kafler {.recommended-posts-container                   {display: none !important}}
+if u-kafle  {.recommended-posts-container                   {display: none !important}}
 if u-filtr  {.filters-widget                                {display: none !important}}
 if u-ggd    {.ggdeals-sidebar-prices-widget                 {display: none !important}}
 if u-ro     {.sidebar-widget:has(.svg-icon-icon-trophy)     {display: none !important}}
@@ -60,7 +58,13 @@ if u-gzd    {.sidebar-widget:has(.svg-icon-icon-pacman)     {display: none !impo
 if u-pub    {.sidebar-widget:has(.svg-icon-icon-news-side)  {display: none !important}}
 if u-onf    {.forum-posts-widget                            {display: none !important}}
 if u-ddn    {.socials-widget                                {display: none !important}}
-if u-ads    {.moneymaker-container, .moneymaker-widget      {display: none !important}}
+
+if u-ads {
+	.moneymaker-container, .moneymaker-widget, 
+	.alert-post:has(.svg-icon-ad), .alert:has(.svg-icon-adwords) {
+		display: none !important
+	}
+}
 
 if t-gzd {
 	.sidebar__inner {
@@ -87,13 +91,20 @@ if sze {
 	.row {
 		justify-content: center
 	}
-	.post-widget .big-img {
-		width: szeimg
-		margin-left: auto
-		margin-right: auto
+	.extended-description {
+		max-width: 1264px
+		margin: auto
 	}
 }
 
+if unpinNav {
+	.main-menu-wrapper.menu-pinned {
+		position: relative
+	}
+	.is-sticked > .sidebar__inner {
+		top: 20px !important
+	}
+}
 
 if sb {
 	//chrome
@@ -137,6 +148,12 @@ if dark {
 		border-top: 1px solid rgba(255, 255, 255, .1)
 		border-bottom: 1px solid rgba(255, 255, 255, .1)
 	}
+	.main-menu-wrapper .container-menu {
+		background: unset
+	}
+	.top-menu-wrapper .top-menu {
+		border-bottom: unset
+	}
 	body .intro:after {
 		content: ""
 		background: linear-gradient(0deg, bg 0%, hbg 100%)
@@ -178,14 +195,7 @@ if dark {
 			background: rgba(255, 255, 255, .3)
 		}
 	}
-	.post .promos-box-wrapper {
-		background: rgba(255, 255, 255, 0)
-		border: 1px solid rgba(255, 255, 255, .1)
-		ul li:before {
-			background: txt
-		}
-	}
-	.ui-widget-content, .recommended-posts-wrapper .recommended-post-single .recommended-post-footer, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper, .similar-posts-wrapper .similar-post-single .similar-post-footer,
+	.ui-widget-content, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper, .similar-posts-wrapper .similar-post-single .similar-post-footer,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
 		background: pbg	
@@ -212,7 +222,7 @@ if dark {
 	}
 	
 	.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a {
+	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer .post-read-more, body.single-post .post-widget.entry {
 		color: txt
 	}
 	[style*="color: initial;"] {
@@ -243,6 +253,12 @@ if dark {
 	.tags-list .tag.category {
 		background: rgba(255, 255, 255, .1);
 		color: txt;
+		&:hover {
+			background: rgba(255, 255, 255, .15);
+		}
+	}
+	body.single-post .post-widget .nc .socials-share-widget .direct-link {
+		background: rgba(255, 255, 255, .05)
 		&:hover {
 			background: rgba(255, 255, 255, .15);
 		}
@@ -330,14 +346,7 @@ if dark {
 	.socials-share-widget .btn-icon.facebook:focus .svg-icon, .socials-share-widget .btn-icon.facebook:hover .svg-icon {
 		fill: rgba(255, 255, 255, .9);
 	}
-	.ggdeals-prices-widget .widget-header {
-		background-color: rgba(255, 255, 255, .1)
-	}
-	.ggdeals-prices-widget .price-row {
-		border: 1px solid rgba(255, 255, 255, .1)
-	}
 	.ggdeals-prices-widget .see-more {
-		background-color: rgba(255, 255, 255, .1)
 		color: txt
 	}
 	.ggdeals-prices-widget .see-more:hover {
@@ -425,6 +434,9 @@ if dark {
 	}
 	.form-group > select > option {
 		background-color: #010a14
+	}
+	.information {
+		background: hbg;
 	}
 	
 	//disqus
