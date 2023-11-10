@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.1.0
+@version        2.1.1
 @description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
@@ -9,10 +9,9 @@
 @supportURL     https://github.com/pabli24/LowcyGier-Dark/issues
 
 @preprocessor   stylus
-@var            checkbox dark     "▼ Ciemny styl ▼ (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)" 1
-@var            number   grd      "Wysokość gradientu tła (0 = brak gradientu)"            ['vh', 60, 0, null]
-@var            color    hbg      "Kolor tła górnego menu i gradientu"                     #036
-@var            color    hbg2     "Kolor tła głównego górnego menu"                        #0d3d6e
+@var            checkbox darkMode "▼ Ciemny styl ▼ (Włącz też oficjalny ciemnny wygląd na stronie w prawym górnym rogu, by ten styl działał poprawnie)" 1
+@var            color    hbg      "Kolor tła górnego menu"                                 #012
+@var            color    hbg2     "Kolor tła głównego górnego menu"                        #001933
 @var            color    bg       "Kolor tła"                                              #012
 @var            color    pbg      "Kolor tła postów"                                       #001933
 @var            color    txt      "Kolor tekstu"                                           #F0F8FF
@@ -27,9 +26,10 @@
 @var            color    sbch     "Kolor paska przewijania po najechaniu (tylko chromium)" #007FFF
 
 @var            number   a0       "▼ UKRYJ ▼"                                              [0,0,0]
-@var            checkbox u-topb   "Górne menu (sociale, ggdeals, bazar itd.)"              0
-@var            checkbox u-kafle  "▯⊟⊟ Kafelki"                                         0
-@var            checkbox u-filtr  "⫸ Filtry"                                              0
+@var            checkbox u-topb   "Górne menu (sociale, ggdeals, bazar, zmiana motywu)"    0
+@var            checkbox u-popul  "Popularne (pod górnym menu)"                            0
+@var            checkbox u-kafle  "▯⊟⊟ Kafelki"                                          0
+@var            checkbox u-filtr  "⫸ Filtry"                                               0
 @var            checkbox u-ggd    "🎮 Tanie doładowania playstation"                       0
 @var            checkbox u-ro     "🏆 Ranking ofert"                                       0
 @var            checkbox u-gzd    "🟡 Gry za darmo"                                        0
@@ -44,32 +44,39 @@
 
 @var            number   a1       "▼ INNE ▼"                                               [0,0,0]
 @var            checkbox t-gzd    "Przenieś '🟡 Gry za darmo' na górę"                     0
-@var            checkbox unpinNav "Odepnij górny pasek nawigacyjny"                        0
+@var            checkbox unpinNav "Odepnij pasek nawigacyjny gdy przewijasz stronę"        0
 ==/UserStyle== */
 
 @-moz-document regexp("https?:\/\/(.*)lowcygier\.pl\/(?!forum).*") {
 
-if u-topb   {.intro-top                                     {display: none !important}}
-if u-kafle  {.recommended-posts-container                   {display: none !important}}
-if u-filtr  {.filters-widget                                {display: none !important}}
-if u-ggd    {.ggdeals-sidebar-prices-widget                 {display: none !important}}
-if u-ro     {.sidebar-widget:has(.svg-icon-icon-trophy)     {display: none !important}}
-if u-gzd    {.sidebar-widget:has(.svg-icon-icon-pacman)     {display: none !important}}
-if u-pub    {.sidebar-widget:has(.svg-icon-icon-news-side)  {display: none !important}}
-if u-onf    {.forum-posts-widget                            {display: none !important}}
-if u-ddn    {.socials-widget                                {display: none !important}}
+i = !important
+
+if u-topb  {.intro-top                                    {display: none i}}
+if u-popul {.main-menu-shortcuts-wrapper                  {display: none i} body .intro {height: auto}}
+if u-kafle {.recommended-posts-container                  {display: none i}}
+if u-filtr {.filters-widget                               {display: none i}}
+if u-ggd   {.ggdeals-sidebar-prices-widget                {display: none i}}
+if u-ro    {.sidebar-widget:has(.svg-icon-icon-trophy)    {display: none i}}
+if u-gzd   {.sidebar-widget:has(.svg-icon-icon-pacman)    {display: none i}}
+if u-pub   {.sidebar-widget:has(.svg-icon-icon-news-side) {display: none i}}
+if u-onf   {.forum-posts-widget                           {display: none i}}
+if u-ddn   {.socials-widget                               {display: none i}}
 
 if u-ads {
-	.moneymaker-container, .moneymaker-widget, 
+	.moneymaker-container, .moneymaker-widget, .friendly-partner-top-container,
 	.alert-post:has(.svg-icon-ad), .alert:has(.svg-icon-adwords) {
-		display: none !important
+		display: none i
+	}
+	body.background-image.background-screening.main-page .intro,
+	body.background-image.background-screening .intro {
+		margin-bottom: 0 i
 	}
 }
 
 if t-gzd {
 	.sidebar__inner {
-		display: flex;
-		flex-direction: column;
+		display: flex
+		flex-direction: column
 	}
 	.sidebar-widget:has(.svg-icon-icon-pacman) {
 		order: -1
@@ -78,7 +85,7 @@ if t-gzd {
 
 if sze {
 	.main-container {
-		max-width: unset !important;
+		max-width: unset i
 	}
 	.content-column {
 		max-width: szepx
@@ -95,6 +102,9 @@ if sze {
 		max-width: 1264px
 		margin: auto
 	}
+	.container, .container-lg, .container-md, .container-sm, .container-xl {
+		max-width: szepx + szepx2
+	}
 }
 
 if unpinNav {
@@ -102,7 +112,7 @@ if unpinNav {
 		position: relative
 	}
 	.is-sticked > .sidebar__inner {
-		top: 20px !important
+		top: 20px i
 	}
 }
 
@@ -116,28 +126,36 @@ if sb {
 		background-color: sbc
 	}
 	::-webkit-scrollbar-thumb:hover {
-		background: sbch !important
+		background: sbch i
 	}
 	::-webkit-scrollbar-corner {
 		background: sbc
 	}
 	//firefox
 	html {
-		scrollbar-color: sbc bg !important
-		scrollbar-width: thin !important
+		scrollbar-color: sbc bg i
+		scrollbar-width: thin i
 	}
 }
-if dark {
-	:root {color-scheme: dark}
+if darkMode {
+	:root {
+		color-scheme: dark
+	}
 	html, body, .footer-widget {
-		background: bg !important
+		background: bg i
 		color: txt
 	}
-	.main-container, body.background-image .intro::before, .top-background {
-		background: rgba(0, 0, 0, 0) !important
+	.main-container, body.background-image .intro::before, .top-background, .main-menu-shortcuts-wrapper {
+		background: bg i
+	}
+	.main-menu-shortcuts-wrapper .shortcuts-list-arrow {
+		background: linear-gradient(90deg,rgba(31,34,51,0) 0, bg 30%, bg 100%)
+	}
+	.main-menu-shortcuts-wrapper .shortcuts-list-arrow.arrow-back {
+		background: linear-gradient(90deg, bg 0, bg 70%,rgba(31,34,51,0) 100%)
 	}
 	.top-background {
-		display: none !important
+		display: none i
 	}
 	body .intro, .top-menu-wrapper,
 	.lg-theme-switcher .switch::before, .lg-theme-switcher .theme-switch-moon {
@@ -154,39 +172,28 @@ if dark {
 	.top-menu-wrapper .top-menu {
 		border-bottom: unset
 	}
-	body .intro:after {
-		content: ""
-		background: linear-gradient(0deg, bg 0%, hbg 100%)
-		position: absolute
-		width: 100%;
-		height: grd
-		margin-top: -12px
-	}
-	body.background-image.background-screening .intro {
-		margin-bottom: 0 !important;
-	}
 	.post .btn-primary,
 	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-bottom .gg-prices-cta-btn {
-		background: btn;
-		color: txt;
+		background: btn
+		color: txt
 	}
 	.post .btn-primary:hover,
 	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-bottom .gg-prices-cta-btn:hover {
-		color: txt;
-		background-color: btnh;
+		color: txt
+		background-color: btnh
 	}
 	.btn-outline-secondary:hover {
-		color: txt;
-		background: rgba(255, 255, 255, .1);
-		border-color: rgba(255, 255, 255, .1);
+		color: txt
+		background: rgba(255, 255, 255, .1)
+		border-color: rgba(255, 255, 255, .1)
 	}
 	.content-column .entry, .search-widget, .filters-widget .filtrowanie .btn, .alert.alert-post {
 		background-color: pbg
 		color: txt
 	}
 	.header-widget #menu .search-widget .btn, .header-widget #menu .search-widget .form-control {
-		background: rgba(255, 255, 255, .05);
-		border: none;
+		background: rgba(255, 255, 255, .05)
+		border: none
 	}
 	.discount-code {
 		border: 1px dashed rgba(255, 255, 255, .45)
@@ -197,7 +204,8 @@ if dark {
 	}
 	.ui-widget-content, .ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper, .similar-posts-wrapper .similar-post-single .similar-post-footer,
 	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label select,
-	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select {
+	.prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-pager select,
+	.filters-widget .filters-container::before {
 		background: pbg	
 	}
 	.prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-default, .prices-table-widget table.prices-table.tablesorter-jui thead tr.tablesorter-headerRow th.tablesorter-header.ui-state-hover {
@@ -222,17 +230,20 @@ if dark {
 	}
 	
 	.post .nc-main .post-title a, .sidebar-widget h3 a, .discount-code:after, .discount-code:before, .post-navigation, .breadcrumbs-widget a, .breadcrumbs-widget li:last-child a, .search-results-header-widget h1, .search-results-header-widget, .extended-description, .footer-widget p, .post-alert .alert-prefix>span, 
-	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer .post-read-more, body.single-post .post-widget.entry {
+	.ui-widget-content, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper .pagesize-label, .prices-table-widget table.prices-table.tablesorter-jui tfoot tr th.tablesorter-pager .pagesize-footer-wrapper select, span, strong, .wp-block-image figcaption, .post-alert time.timeago, .sidebar-widget h3, .recommended-posts-container .recommended-posts-widget h3, .recommended-posts-container .recommended-posts-widget h3 a, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer, .post:not(.post-single) .lead-wrapper.lead-shorten.with-offer .post-read-more, body.single-post .post-widget.entry, .post:not(.post-single) .lead-wrapper.lead-shorten {
 		color: txt
 	}
-	[style*="color: initial;"] {
-		color: txt !important
+	.post .meta-offers-link .offers-link {
+		color: txt2
+	}
+	[style*="color: initial"] {
+		color: txt i
 	}
 	.breadcrumbs-widget .svg-icon-home, .svg-icon-arrow-breadcrumbs {
 		fill: txt
 	}
 	.arrow-nav:hover:after {
-		border-color: atxth !important
+		border-color: atxth i
 	}
 	.post .nc-meta, .post .nc-submeta, .post .meta-comments .comments-link,
 	.sidebar .entry .comments-indicator {
@@ -251,55 +262,58 @@ if dark {
 	}
 	
 	.tags-list .tag.category {
-		background: rgba(255, 255, 255, .1);
-		color: txt;
+		background: rgba(255, 255, 255, .1)
+		color: txt
 		&:hover {
-			background: rgba(255, 255, 255, .15);
+			background: rgba(255, 255, 255, .15)
 		}
 	}
 	body.single-post .post-widget .nc .socials-share-widget .direct-link {
 		background: rgba(255, 255, 255, .05)
 		&:hover {
-			background: rgba(255, 255, 255, .15);
+			background: rgba(255, 255, 255, .15)
 		}
 	}
 	
-	.filters-widget .shortcuts-container, .filters-widget .filters-container, .filters-widget .filters-container .search-widget {
-		background: pbg;
+	.filters-widget .filters-container {
+		border-bottom: 1px solid rgba(255, 255, 255, .2)
+	}
+	.filters-widget .filters-container .filters-links-list .filters-links-item {
+		color: txt2;
 	}
 	.filters-widget .filters-container .filter-dropdown-trigger {
-		border-right: 1px solid rgba(255, 255, 255, 0);
-		color: txt;
+		border-right: 1px solid rgba(255, 255, 255, 0)
+		color: txt
 		&:hover {
-			background: rgba(255, 255, 255, .05);
+			background: rgba(255, 255, 255, .05)
 		}
 	}
-	.input-group {
-		background: rgba(255, 255, 255, .05);
+	.input-group, .search-widget.header-search-widget .input-group {
+		background: rgba(255, 255, 255, .05)
 	}
 	.btn-secondary {
-		color: txt;
-		background-color: rgba(255, 255, 255, .05);
-		border-color: rgba(255, 255, 255, .05);
+		color: txt
+		background-color: rgba(255, 255, 255, .05)
+		border-color: rgba(255, 255, 255, .05)
 	}
 	.form-control {
 		^[0], &:focus, &:active, &:hover {
-			color: txt;
-			background-color: rgba(255, 255, 255, .05);
-			border: 0px solid rgba(255, 255, 255, .05) !important;
+			color: txt
+			background-color: rgba(255, 255, 255, .05)
+			border: 0px solid rgba(255, 255, 255, .05) i
 		}
 	}
 	.search-widget .btn {
 		^[0], &:focus, &:active, &:hover {
-			background-color: rgba(255, 255, 255, .05) !important;
-			border-color: rgba(255, 255, 255, .05) !important;
+			background-color: rgba(255, 255, 255, .05) i
+			border-color: rgba(255, 255, 255, .05) i
 		}
 	}
 	.filters-widget .filters-container .search-widget .btn .svg-icon {
-		fill: txt;
+		fill: txt
 	}
 	.filters-widget .filters-container .filters-dropdown-content, .filters-widget .filters-container.show .filter-dropdown-trigger {
-		background: pbg;
+		background: pbg
 	}
 	
 	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
@@ -313,7 +327,7 @@ if dark {
 		background: rgba(255, 255, 255, .1)
 	}
 	hr, .border-top, .footer-widget .section-divider, body.single-post .post-widget .border-top {
-		border-top: 1px solid rgba(255, 255, 255, .1) !important
+		border-top: 1px solid rgba(255, 255, 255, .1) i
 	}
 	.socials-group-widget, .socials-group-widget.group-type-ps {
 		background: rgba(255, 255, 255, .1)
@@ -337,14 +351,14 @@ if dark {
 		background: rgba(255,255,255,0.1)
 	}
 	body.single-post .post-widget .nc .nc-links .socials-share-widget .direct-link:hover {
-		background: rgba(255,255,255,0.2);
+		background: rgba(255,255,255,0.2)
 	}
 	.socials-share-widget .btn-icon.facebook .svg-icon, .socials-share-widget .btn-icon.twitter .svg-icon {
-		fill: rgba(255, 255, 255, .6);
+		fill: rgba(255, 255, 255, .6)
 	}
 	.socials-share-widget .btn-icon.twitter:focus .svg-icon, .socials-share-widget .btn-icon.twitter:hover .svg-icon,
 	.socials-share-widget .btn-icon.facebook:focus .svg-icon, .socials-share-widget .btn-icon.facebook:hover .svg-icon {
-		fill: rgba(255, 255, 255, .9);
+		fill: rgba(255, 255, 255, .9)
 	}
 	.ggdeals-prices-widget .see-more {
 		color: txt
@@ -374,14 +388,14 @@ if dark {
 	}
 	
 	.ggdeals-sidebar-prices-widget .gg-prices-inner-wrapper .gg-prices-inner-tabs-content .gg-prices-inner-tab-content .gg-prices-offers-list .gg-prices-offer-row .gg-prices-offer-tags .gg-prices-offer-tag {
-		background: rgba(255, 255, 255, .05);
-		color: txt;
-		border: 1px dashed rgba(255, 255, 255, .2);
+		background: rgba(255, 255, 255, .05)
+		color: txt
+		border: 1px dashed rgba(255, 255, 255, .2)
 	}
 	
 	.sidebar-widget h3, .sidebar .forum-posts-widget .entry {
-		border-bottom: 1px solid rgba(255, 255, 255, .2);
-		color: rgba(255,255,255,.8);
+		border-bottom: 1px solid rgba(255, 255, 255, .2)
+		color: rgba(255,255,255,.8)
 	}
 	
 	// bazar
@@ -411,7 +425,7 @@ if dark {
 		border-right: 1px solid rgba(255, 255, 255, .1)
 	}
 	.myactive > a {
-		color: #fff !important
+		color: #fff i
 	}
 	.easy-autocomplete input {
 		border-color: #010a14
@@ -428,15 +442,15 @@ if dark {
 		background-color: #010a14
 	}
 	.btn-default {
-		color: #fff !important
-		background-color: rgba(0,0,0,0.2) !important
-		border-color: #010a14 !important
+		color: #fff i
+		background-color: rgba(0,0,0,0.2) i
+		border-color: #010a14 i
 	}
 	.form-group > select > option {
 		background-color: #010a14
 	}
 	.information {
-		background: hbg;
+		background: hbg
 	}
 	
 	//disqus
@@ -450,61 +464,65 @@ if dark {
 }
 @-moz-document url-prefix("https://disqus.com/embed/comments/?base=default&f=lowcygier") {
 
-if dark {
-	:root {color-scheme: dark}
+if darkMode {
+	:root {
+		color-scheme: dark
+	}
 	html, body {
-		background: pbg !important;
-		color: txt;
+		background: pbg i
+		color: txt
 	}
 	.post-content .post-menu .dropdown-toggle {
-		border-color: rgba(255, 255, 255, .05) !important;
+		border-color: rgba(255, 255, 255, .05) i
 	}
 	.post-votes .post-votes__separator {
-		border-right: 2px solid rgba(255, 255, 255, .05) !important;
+		border-right: 2px solid rgba(255, 255, 255, .05) i
 	}
 	.alert.alert--realtime, .alert.info, .alert.success, .dark .alert.alert--realtime, .dark .alert.info, .dark .alert.success {
-		background: rgba(255, 255, 255, .05);
+		background: rgba(255, 255, 255, .05)
 	}
 	.dark .load-more__button {
-		background: rgba(255, 255, 255, .05);
-		color: txt;
+		background: rgba(255, 255, 255, .05)
+		color: txt
 	}
 	.dark .load-more__button:hover {
-		background: rgba(255, 255, 255, .05);
-		color: txt;
+		background: rgba(255, 255, 255, .05)
+		color: txt
 	}
 	.textarea {
-		color: txt;
+		color: txt
 	}
 	.textarea-outer-wrapper .textarea-wrapper {
-		background: rgba(255, 255, 255, .05);
-		border: 2px solid rgba(255, 255, 255, .05);
+		background: rgba(255, 255, 255, .05)
+		border: 2px solid rgba(255, 255, 255, .05)
 	}
 	.dark .input--text {
-		color: txt;
-		background: rgba(255, 255, 255, .05);
-		border-color: rgba(255, 255, 255, .05);
+		color: txt
+		background: rgba(255, 255, 255, .05)
+		border-color: rgba(255, 255, 255, .05)
 	}
 	.post-actions {
-		background: rgba(255, 255, 255, .05);
-		border-top: solid 2px rgba(255, 255, 255, .05);
+		background: rgba(255, 255, 255, .05)
+		border-top: solid 2px rgba(255, 255, 255, .05)
 	}
 	.wysiwyg .vertical-separator {
-		border-right: 2px solid rgba(255, 255, 255, .05);
+		border-right: 2px solid rgba(255, 255, 255, .05)
 	}
 	.wysiwyg__item {	
-		filter: brightness(10);
+		filter: brightness(10)
 	}
 }
 
 }
 @-moz-document url-prefix("https://disqus.com/recommendations/?base=default&f=lowcygier") {
 
-if dark {
-	:root {color-scheme: dark}
+if darkMode {
+	:root {
+		color-scheme: dark
+	}
 	html, body {
-		background: bg !important;
-		color: txt;
+		background: bg i
+		color: txt
 	}
 }
 
