@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           lowcygier.pl - Ciemny Styl
 @namespace      github.com/pabli24
-@version        2.1.4
+@version        2.1.5
 @description    Ciemny styl na Łowcy Gier i bazarze, ukrywanie niechcianych elementów na stronie, ukrywanie reklam, zmiana szerokości strony
 @author         Pabli
 @license        MIT
@@ -64,11 +64,15 @@ if u-ddn   {.socials-widget                               {display: none i}}
 
 if u-ads {
 	.moneymaker-container, .moneymaker-widget, .friendly-partner-top-container,
-	.szybki-kalkulator, #szybki-kalkulator, #wyladowany-zegar, div:has(> [href^="https://lowcygier.pl/r/"]),
+	.szybki-kalkulator, #szybki-kalkulator, #wyladowany-zegar, 
+	div:not(.offer-row-container, .nc-links):has(> [href^="https://lowcygier.pl/r/"]),
 	.alert-post:has(.svg-icon-ad), .alert:has(.svg-icon-adwords) {
 		display: none i
+		visibility: hidden i
+		width: 0 i
+		height: 0 i
 	}
-	.intro,  header.intro,
+	.intro, header.intro,
 	body.background-image.background-screening.main-page .intro,
 	body.background-image.background-screening .intro,
 	body.main-page .content-wrapper header.intro,
